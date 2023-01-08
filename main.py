@@ -3,7 +3,6 @@ from discord.ext import commands
 import numpy as np
 from PIL import Image
 
-
 intents = discord.Intents.default()
 intents.guilds = True
 intents.members = True
@@ -34,16 +33,19 @@ async def on_voice_state_update(member,before,after):
 @bot.command() #manually triggered for now
 async def memeify(ctx):
     list_im = [r'images\Header.jpg',r'images\testMeme.jpg']
-    imgs    = [ Image.open(i) for i in list_im ]
+    imgs = [Image.open(i) for i in list_im]
     imgs_comb = np.vstack([i for i in imgs])
 
-    # save & send
+    #save & send
     imgs_comb = Image.fromarray(imgs_comb)
     imgs_comb.save(r'images\finalMeme.png')
     await ctx.send(file=discord.File(r'D:\Users\Sammi\Desktop\LiveMaikReactionBot\images\finalMeme.png'))
 
+"""
+[ ] figure out the getting of the screenshot
+[ ] write code for updating the emote
+[ ] use datetime to make a yearly recap on Maik's birthday
+[ ] archive all the created maiks on a website
+"""
+
 bot.run(TOKEN)
-
-
-
-
