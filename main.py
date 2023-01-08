@@ -1,5 +1,8 @@
 import discord
 from discord.ext import commands
+import numpy as np
+from PIL import Image
+
 
 intents = discord.Intents.default()
 intents.guilds = True
@@ -7,6 +10,8 @@ intents.members = True
 intents.messages = True
 intents.message_content = True
 intents.voice_states = True
+intents.emojis = True
+intents.emojis_and_stickers = True
 
 #grabs token from local file
 with open('TOKEN.txt','r') as f:
@@ -26,5 +31,19 @@ async def on_voice_state_update(member,before,after):
             print(x)
         print("\n\n")
 
+@bot.command() #manually triggered for now
+async def memeify(ctx):
+    list_im = [r'images\Header.jpg',r'images\testMeme.jpg']
+    imgs    = [ Image.open(i) for i in list_im ]
+    imgs_comb = np.vstack([i for i in imgs])
+
+    # save & send
+    imgs_comb = Image.fromarray(imgs_comb)
+    imgs_comb.save(r'images\finalMeme.png')
+    await ctx.send(file=discord.File(r'D:\Users\Sammi\Desktop\LiveMaikReactionBot\images\finalMeme.png'))
 
 bot.run(TOKEN)
+
+
+
+
