@@ -46,6 +46,8 @@ async def memeify(ctx):
 [ ] write code for updating the emote
 [ ] use datetime to make a yearly recap on Maik's birthday
 [ ] archive all the created maiks on a website
+
+[ ] make rain cover up bot through alt
 """
 
 bot.run(TOKEN)
